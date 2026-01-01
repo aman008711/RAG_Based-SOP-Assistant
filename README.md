@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 # RAG-Based SOP Assistant
 
@@ -7,7 +7,7 @@
 # RAG-Based SOP Assistant
 
 A **RAG (Retrieval-Augmented Generation) based SOP Assistant** that allows users to query PDFs and get accurate, document-based answers.
->>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
+
 
 ---
 
@@ -78,12 +78,12 @@ In Week 2, the system was enabled to answer user questions using the document.
 * Accurate document-based answers
 * No hallucinated or random responses
 * Safe and reliable QA system
-<<<<<<< HEAD
+
 * **Modern Web Interface** with chat history and improved UX
 * **Multiple PDF Support** for comprehensive document analysis
 * **Optimized Performance** with model caching for fast loading
 =======
->>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
+
 
 ---
 
@@ -104,7 +104,7 @@ In Week 2, the system was enabled to answer user questions using the document.
 ## Project Structure
 
 ```
-<<<<<<< HEAD
+
 config.yaml          # Configuration settings
 api.py               # API key management
 main.py              # Week 3 FastAPI server
@@ -161,7 +161,7 @@ retrieval/         # Code to query vector store and generate responses
 vectorstore/       # FAISS index storage
 requirements.txt   # Project dependencies
 README.md          # Project documentation
->>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
+
 ```
 
 ---
@@ -177,124 +177,6 @@ source venv/bin/activate    # Mac/Linux
 pip install -r requirements.txt
 ```
 
-<<<<<<< HEAD
-### API Keys (Optional)
-For the current setup with `all-MiniLM-L6-v2`, **no API keys are required**. 
-
-If you want to use other models or services:
-1. Copy `.env.example` to `.env`
-2. Add your API keys to `config.yaml` or `.env`
-3. The system will automatically use them when available
-
----
-
-## 🟢 Week 3 – FastAPI Backend & Streaming
-
-In Week 3, we added a production-ready FastAPI backend with streaming responses and OpenAI integration.
-
-### Features Implemented
-
-1. **FastAPI Endpoints**
-   - `/ask` - Streaming question answering
-   - `/health` - API health check
-   - `/web` - Web interface for testing
-
-2. **Streaming Responses**
-   - Typewriter effect (word-by-word streaming)
-   - Server-Sent Events (SSE)
-   - Real-time token streaming
-
-3. **OpenAI Integration**
-   - GPT-3.5-turbo for enhanced responses
-   - Conversational memory
-   - LangChain chat chains
-
-4. **Performance Monitoring**
-   - TTFT (Time To First Token) measurement
-   - Target: < 1 second
-   - Comprehensive performance testing
-
-### Setup for Week 3
-
-1. **Install new dependencies:**
-```bash
-pip install -r requirements.txt
-```
-
-2. **Add OpenAI API Key** (for LLM features):
-```yaml
-# In config.yaml
-openai_api_key: "your-openai-api-key-here"
-```
-
-3. **Start FastAPI Server:**
-```bash
-python main.py
-```
-
-4. **Access the API:**
-   - **API Docs:** http://localhost:8000/docs
-   - **Web Interface:** http://localhost:8000/web
-   - **Health Check:** http://localhost:8000/health
-
-### Testing the API
-
-**Using curl:**
-```bash
-# Health check
-curl http://localhost:8000/health
-
-# Ask a question
-curl -X POST "http://localhost:8000/ask" \
-  -H "Content-Type: application/json" \
-  -d '{"question": "What is the employee onboarding process?", "session_id": "test"}'
-```
-
-**Performance Testing:**
-```bash
-python performance_test_week3.py
-```
-
-### API Response Format
-
-**Streaming Response:**
-```json
-data: {"ttft": 0.234}
-data: {"token": "The "}
-data: {"token": "employee "}
-data: {"token": "onboarding "}
-data: {"complete": true, "sources": [...]}
-```
-
----
-
-## 🚀 Quick Start (Working Solution)
-
-### Option 1: Streamlit Web Interface (Recommended)
-1. Process documents:
-```bash
-python -c "import sys; sys.path.append('ingestion'); from ingest import main; main()"
-```
-2. Start the web interface:
-```bash
-streamlit run app.py
-```
-3. Open browser to `http://localhost:8501`
-
-### Option 2: Command Line Interface
-1. Process documents:
-```bash
-python -c "import sys; sys.path.append('ingestion'); from ingest import main; main()"
-```
-2. Start interactive assistant:
-```bash
-python rag_assistant.py
-```
-
-### Option 3: Test Everything
-```bash
-python test_ingestion_retrieval.py
-=======
 ---
 
 ## Usage
@@ -310,44 +192,16 @@ python ingestion/ingest.py
 
 ```bash
 python retrieval/retrieve.py
->>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
 ```
 
 ---
 
 ## License
 
-<<<<<<< HEAD
-MIT License'''
-
-
-
-
-
-
-
-
-
-
-
-'''# 1. Activate virtual environment
-venv\Scripts\activate
-
-# 2. Install/update dependencies (if needed)
-pip install -r requirements.txt
-
-# 3. Process PDF documents
-python -c "import sys; sys.path.append('ingestion'); from ingest import main; main()"
-
-# 4. Choose your interface:
-# Option A: Web interface (recommended)
-streamlit run app.py
-
-# Option B: Command line interface
-python rag_assistant.py'''
-=======
 # RAG_Based-SOP-Assistant
 
 =======
 MIT License
->>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
+
+
+To use the WEB UI rub - streamlit run app.py
