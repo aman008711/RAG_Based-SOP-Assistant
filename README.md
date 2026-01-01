@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # RAG-Based SOP Assistant
 
 '''A **RAG (Retrieval-Augmented Generation) based SOP Assistant** that allows users to query PDFs and get accurate, document-based answers.
@@ -308,4 +308,4 @@ streamlit run app.py
 python rag_assistant.py'''
 =======
 # RAG_Based-SOP-Assistant
->>>>>>> 8831348079240372a473c2c4066554c88b288347
+
