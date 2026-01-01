@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 
 # RAG-Based SOP Assistant
 
 '''A **RAG (Retrieval-Augmented Generation) based SOP Assistant** that allows users to query PDFs and get accurate, document-based answers.
+=======
+# RAG-Based SOP Assistant
+
+A **RAG (Retrieval-Augmented Generation) based SOP Assistant** that allows users to query PDFs and get accurate, document-based answers.
+>>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
 
 ---
 
@@ -72,9 +78,12 @@ In Week 2, the system was enabled to answer user questions using the document.
 * Accurate document-based answers
 * No hallucinated or random responses
 * Safe and reliable QA system
+<<<<<<< HEAD
 * **Modern Web Interface** with chat history and improved UX
 * **Multiple PDF Support** for comprehensive document analysis
 * **Optimized Performance** with model caching for fast loading
+=======
+>>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
 
 ---
 
@@ -95,6 +104,7 @@ In Week 2, the system was enabled to answer user questions using the document.
 ## Project Structure
 
 ```
+<<<<<<< HEAD
 config.yaml          # Configuration settings
 api.py               # API key management
 main.py              # Week 3 FastAPI server
@@ -142,6 +152,16 @@ layout: "wide"                      # App layout
 max_results: 3                      # Number of results to show
 show_page_numbers: true             # Display page numbers
 show_confidence_scores: true        # Show confidence levels
+=======
+.env/              # Environment variables
+venv/              # Virtual environment (ignored in GitHub)
+data/pdf/          # Sample PDF files
+ingestion/         # Code to ingest PDFs into the vector store
+retrieval/         # Code to query vector store and generate responses
+vectorstore/       # FAISS index storage
+requirements.txt   # Project dependencies
+README.md          # Project documentation
+>>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
 ```
 
 ---
@@ -157,6 +177,7 @@ source venv/bin/activate    # Mac/Linux
 pip install -r requirements.txt
 ```
 
+<<<<<<< HEAD
 ### API Keys (Optional)
 For the current setup with `all-MiniLM-L6-v2`, **no API keys are required**. 
 
@@ -273,12 +294,30 @@ python rag_assistant.py
 ### Option 3: Test Everything
 ```bash
 python test_ingestion_retrieval.py
+=======
+---
+
+## Usage
+
+1. Place your PDF files in `data/pdf/`.
+2. Run ingestion script:
+
+```bash
+python ingestion/ingest.py
+```
+
+3. Run retrieval script:
+
+```bash
+python retrieval/retrieve.py
+>>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
 ```
 
 ---
 
 ## License
 
+<<<<<<< HEAD
 MIT License'''
 
 
@@ -309,3 +348,6 @@ python rag_assistant.py'''
 =======
 # RAG_Based-SOP-Assistant
 
+=======
+MIT License
+>>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854

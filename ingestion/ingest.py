@@ -43,6 +43,7 @@ def main():
     print("✅ Week 1 completed: Ingestion + FAISS index created")
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     main()
 
 
@@ -109,3 +110,6 @@ if __name__ == "__main__":
 
 
 
+=======
+    main()
+>>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854

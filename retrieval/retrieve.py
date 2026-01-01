@@ -43,6 +43,7 @@ if __name__ == "__main__":
         q = input("\nAsk a question: ")
         if q.lower() == "exit":
             break
+<<<<<<< HEAD
         print(retrieve_answer(q))
 
 
@@ -115,3 +116,6 @@ if __name__ == "__main__":
 
 
 
+=======
+        print(retrieve_answer(q))
+>>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854

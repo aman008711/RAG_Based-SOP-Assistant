@@ -1,6 +1,7 @@
 langchain
 pypdf
 faiss-cpu
+<<<<<<< HEAD
 sentence-transformers
 streamlit
 PyYAML
@@ -8,3 +9,6 @@ fastapi
 uvicorn
 openai
 langchain-openai 
+=======
+sentence-transformers
+>>>>>>> a8d9ec04a1fb2516541dfe259fa8f4d25914e854
