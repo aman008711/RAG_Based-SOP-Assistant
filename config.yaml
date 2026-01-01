@@ -1,0 +1,39 @@
+# RAG-Based SOP Assistant Configuration
+# Edit these settings to customize your assistant
+
+# API Keys (Optional - leave empty if not using)
+# huggingface_token: "your_huggingface_token_here"  # For faster downloads and private models
+openai_api_key: ""  # Required for Week 3 OpenAI LLM integration
+# anthropic_api_key: ""  # If using Anthropic Claude
+
+# Embedding Configuration
+embedding_model: "all-MiniLM-L6-v2"
+max_distance: 1.2
+
+# Text Processing
+chunk_size: 1000
+chunk_overlap: 200
+
+# File Paths
+pdf_directory: "data/pdf"
+vectorstore_path: "vectorstore/faiss_index"
+
+# UI Settings
+page_title: "SOP Assistant"
+page_icon: ":books:"
+layout: "wide"
+
+# Search Settings
+max_results: 5
+show_page_numbers: true
+show_confidence_scores: true
+
+# Week 3 - FastAPI & OpenAI Settings
+openai_model: "gpt-3.5-turbo"  # LLM model for responses
+temperature: 0.1              # Response creativity (0.0-1.0)
+max_tokens: 500               # Maximum response length
+streaming_delay: 0.03         # Delay between tokens for typewriter effect
+
+# Performance Settings
+target_ttft: 1.0              # Target Time To First Token (seconds)
+enable_performance_logging: true

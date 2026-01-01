@@ -1,0 +1,10 @@
+langchain
+pypdf
+faiss-cpu
+sentence-transformers
+streamlit
+PyYAML
+fastapi
+uvicorn
+openai
+langchain-openai 
