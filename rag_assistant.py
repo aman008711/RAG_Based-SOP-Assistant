@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 def main():
     print("🤖 RAG-Based SOP Assistant - Working Version")
     print("=" * 50)
-
+    
     # Check if vectorstore exists
     vectorstore_path = "vectorstore/faiss_index"
     if not os.path.exists(os.path.join(vectorstore_path, "index.faiss")):
@@ -30,6 +30,7 @@ def main():
 
     print("\n🔍 Starting interactive retrieval...")
     print("Type 'exit' to quit\n")
+
 
     # Start retrieval
     try:

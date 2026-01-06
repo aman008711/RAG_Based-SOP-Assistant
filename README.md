@@ -306,3 +306,5 @@ streamlit run app.py
 
 # Option B: Command line interface
 python rag_assistant.py'''
+
+Run Backend : uvicorn api_backend:app --reload

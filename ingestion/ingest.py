@@ -1,7 +1,10 @@
+from email import policy
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
+from langchain_core.documents import Document
+from ..utils.chunker import chunk_text
 import os
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -40,6 +43,13 @@ def main():
 
     vectorstore.save_local(VECTORSTORE_PATH)
 
-    print("✅ Week 1 completed: Ingestion + FAISS index created")
-    if __name__ == "__main__":
+# Example inside your loop that splits PDF into chunks
+for doc in docs:
+    text = doc.page_content
+    source = doc.metadata.get("source", "Unknown")
+    page = doc.metadata.get("page", "N/A")
+    chunked_docs = chunk_text(text, source, page)
+
+print("✅ Week 1 completed: Ingestion + FAISS index created")
+if __name__ == "__main__":
         main()
