@@ -1,25 +1,80 @@
 #!/usr/bin/env python3
 """
-Working RAG-Based SOP Assistant
-Combines ingestion and retrieval into a single working system
+Optimized RAG-Based SOP Assistant
+- Vector DB loaded once
+- Retriever cached
+- Fast query execution
 """
 
 import sys
 import os
+
+# Ensure project root in path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+# ================== Imports ==================
+from core.vector_store import load_vector_store
+from langchain_community.llms import Ollama   # change if using other LLM
+
+# ================== Load heavy objects ONCE ==================
+
+# Load vector database (cached)
+vector_db = load_vector_store()
+
+# Create retriever (optimized)
+retriever = vector_db.as_retriever(
+    search_type="similarity",
+    search_kwargs={"k": 3}
+)
+
+# Load LLM once
+llm = Ollama(model="llama3")
+
+# ================== Core RAG Function ==================
+
+def get_answer(query: str):
+    """
+    Retrieve relevant documents and generate answer
+    """
+    docs = retriever.get_relevant_documents(query)
+
+    if not docs:
+        return {
+            "answer": "No relevant information found.",
+            "sources": []
+        }
+
+    context = "\n\n".join(doc.page_content for doc in docs)
+
+    final_answer = llm.invoke(
+        context + "\n\nQuestion: " + query
+    )
+
+    sources = [
+        {
+            "source": doc.metadata.get("source"),
+            "page": doc.metadata.get("page")
+        }
+        for doc in docs
+    ]
+
+    return {
+        "answer": final_answer,
+        "sources": sources
+    }
+
+# ================== CLI MODE (Optional) ==================
+
 def main():
-    print("🤖 RAG-Based SOP Assistant - Working Version")
+    print("🤖 RAG-Based SOP Assistant")
     print("=" * 50)
-    
+
     # Check if vectorstore exists
     vectorstore_path = "vectorstore/faiss_index"
     if not os.path.exists(os.path.join(vectorstore_path, "index.faiss")):
-        print("📂 No vectorstore found. Running ingestion first...")
+        print("📂 No vectorstore found. Running ingestion...")
         try:
-            import sys
-            sys.path.append('ingestion')
-            from ingest import main as ingest_main
+            from ingestion.ingest import main as ingest_main
             ingest_main()
             print("✅ Ingestion completed!")
         except Exception as e:
@@ -28,26 +83,29 @@ def main():
     else:
         print("✅ Vectorstore found - skipping ingestion")
 
-    print("\n🔍 Starting interactive retrieval...")
-    print("Type 'exit' to quit\n")
+    print("\n🔍 Ask questions (type 'exit' to quit)\n")
 
-
-    # Start retrieval
     try:
-        from retrieval.retrieve import retrieve_answer
         while True:
-            question = input("Ask a question: ").strip()
-            if question.lower() == 'exit':
+            question = input("❓ Question: ").strip()
+            if question.lower() == "exit":
                 break
+
             if question:
-                answer = retrieve_answer(question)
-                print(f"\n{answer}\n")
+                response = get_answer(question)
+                print("\n🧠 Answer:")
+                print(response["answer"])
+                print("\n📄 Sources:")
+                for src in response["sources"]:
+                    print(src)
+                print("-" * 40)
             else:
-                print("Please enter a question.\n")
+                print("⚠️ Please enter a question")
+
     except KeyboardInterrupt:
         print("\n👋 Goodbye!")
-    except Exception as e:
-        print(f"❌ Retrieval failed: {e}")
+
+# ================== Entry Point ==================
 
 if __name__ == "__main__":
     main()
