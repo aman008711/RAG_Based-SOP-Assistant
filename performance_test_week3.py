@@ -154,7 +154,7 @@ def run_performance_tests():
             print("📈 PERFORMANCE SUMMARY")
             print("=" * 30)
             print(f"✅ Successful tests: {len(successful_results)}/{len(test_questions)}")
-            print(".3f"            print(".3f"            print(".3f"            print(".3f"
+            print(".3f")
             # Check target achievement
             target_ttft = config.get('target_ttft', 1.0)
             avg_ttft = statistics.mean(ttft_values)
