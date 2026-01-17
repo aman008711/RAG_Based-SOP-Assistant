@@ -1,0 +1,69 @@
+═══════════════════════════════════════════════════════════════════════════════
+              GITHUB PUSH - OPTION 1 - QUICK REFERENCE CARD
+═══════════════════════════════════════════════════════════════════════════════
+
+YOUR TASK: Get collaborator access from aman008711
+
+═══════════════════════════════════════════════════════════════════════════════
+THE QUICK WAY (3 MINUTES)
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Browser → https://github.com/aman008711/RAG_Based-SOP-Assistant
+
+2. Click "Issues" tab
+
+3. Click green "New Issue" button
+
+4. Copy-Paste This Message:
+
+   TITLE:
+   Request to Add Collaborator: vishakha489
+
+   BODY:
+   Hi @aman008711,
+
+   I'm vishakha489. I completed today's RAG-Based SOP Assistant work:
+   - 26 files with documentation, tests, rate limiting
+   - 5,073 lines of code added
+   - All committed (d457eda) and ready to push
+
+   Could you add me as collaborator?
+
+   Thank you!
+
+5. Click "Submit new issue"
+
+6. DONE! Now wait for owner response.
+
+═══════════════════════════════════════════════════════════════════════════════
+AFTER OWNER RESPONDS
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Check your email for: "GitHub invitation"
+2. Click "Accept" in the email
+3. Come back to terminal
+4. Run: git push origin main
+5. Your work is pushed!
+
+═══════════════════════════════════════════════════════════════════════════════
+TIMELINE
+═══════════════════════════════════════════════════════════════════════════════
+
+NOW:           Send message (5 min)
+SOON:          Owner adds you (1-24 hours)
+THEN:          Accept invitation (1 min)
+FINALLY:       Push work (1 min)
+
+═══════════════════════════════════════════════════════════════════════════════
+YOUR WORK READY TO PUSH
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ 26 files committed
+✓ 5,073 lines added
+✓ Ready for GitHub
+
+═══════════════════════════════════════════════════════════════════════════════
+
+START: Go to https://github.com/aman008711/RAG_Based-SOP-Assistant
+
+═══════════════════════════════════════════════════════════════════════════════

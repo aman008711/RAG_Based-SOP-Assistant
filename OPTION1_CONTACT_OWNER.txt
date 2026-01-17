@@ -1,0 +1,178 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║               OPTION 1: CONTACT REPOSITORY OWNER - GUIDE                   ║
+║                          January 17, 2026                                   ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════
+STEP 1: FIND THE REPOSITORY OWNER
+═══════════════════════════════════════════════════════════════════════════════
+
+Repository Owner: aman008711
+GitHub Profile: https://github.com/aman008711
+
+═══════════════════════════════════════════════════════════════════════════════
+STEP 2: CONTACT THEM - CHOOSE ONE METHOD
+═══════════════════════════════════════════════════════════════════════════════
+
+METHOD A: GitHub Issue (RECOMMENDED)
+────────────────────────────────────────
+1. Go to: https://github.com/aman008711/RAG_Based-SOP-Assistant
+2. Click "Issues" tab
+3. Click "New Issue"
+4. Copy the message below (see Step 3)
+5. Click "Submit new issue"
+
+METHOD B: GitHub Discussion (If available)
+────────────────────────────────────────
+1. Go to: https://github.com/aman008711/RAG_Based-SOP-Assistant
+2. Click "Discussions" tab
+3. Click "New discussion"
+4. Copy the message below (see Step 3)
+5. Post the discussion
+
+METHOD C: Direct Message on GitHub
+────────────────────────────────────────
+1. Go to: https://github.com/aman008711
+2. Click on their profile
+3. Look for "Follow" or message option
+4. Send them the message below (see Step 3)
+
+═══════════════════════════════════════════════════════════════════════════════
+STEP 3: MESSAGE TEMPLATE (COPY & PASTE)
+═══════════════════════════════════════════════════════════════════════════════
+
+Title: Request to Add Collaborator: vishakha489
+
+Message:
+────────────────────────────────────────
+
+Hi @aman008711,
+
+I'm vishakha489 and I've completed significant work on the RAG-Based SOP 
+Assistant project today:
+
+**Work Completed:**
+- 26 files modified/created
+- 5,073 lines of code added
+- Comprehensive documentation (11 files)
+- Test suites and validation scripts (8 files)
+- Docker configuration
+- Rate limiting implementation
+- System verification and production readiness checks
+
+**Status:**
+- All work is committed locally (commit d457eda)
+- Ready to push to GitHub
+- Just need collaborator access
+
+**Request:**
+Could you please add me (vishakha489) as a collaborator to this repository?
+Once added, I'll push my commits immediately.
+
+Thank you!
+
+────────────────────────────────────────
+
+═══════════════════════════════════════════════════════════════════════════════
+STEP 4: WHAT HAPPENS NEXT
+═══════════════════════════════════════════════════════════════════════════════
+
+Timeline:
+  1. You send the message (5 minutes)
+  2. Owner receives notification (instant)
+  3. Owner reviews your request (1-24 hours usually)
+  4. Owner adds you as collaborator
+  5. You receive invitation email from GitHub
+  6. You accept the invitation
+  7. You come back and run: git push origin main
+  8. Your 26 files are pushed to GitHub!
+
+═══════════════════════════════════════════════════════════════════════════════
+STEP 5: AFTER YOU GET COLLABORATOR ACCESS
+═══════════════════════════════════════════════════════════════════════════════
+
+You'll receive an email from GitHub that says something like:
+
+  "aman008711 invited you to collaborate on 
+   RAG_Based-SOP-Assistant"
+
+Click "Accept" in that email.
+
+Then come back to terminal and run:
+
+  git push origin main
+
+Your 26 files will be pushed to GitHub!
+
+═══════════════════════════════════════════════════════════════════════════════
+DETAILED INSTRUCTIONS FOR EACH METHOD
+═══════════════════════════════════════════════════════════════════════════════
+
+METHOD A: USING GITHUB ISSUE (STEP-BY-STEP)
+────────────────────────────────────────────────────────────────
+
+1. Open browser
+2. Go to: https://github.com/aman008711/RAG_Based-SOP-Assistant
+3. Click the "Issues" tab (top of page)
+4. Click green "New Issue" button
+5. In "Title" field, paste:
+   "Request to Add Collaborator: vishakha489"
+6. In the text area below, paste the message from Step 3
+7. Click "Submit new issue"
+8. Done! Owner will see your request
+
+METHOD B: USING GITHUB DISCUSSION (STEP-BY-STEP)
+────────────────────────────────────────────────────────────────
+
+1. Open browser
+2. Go to: https://github.com/aman008711/RAG_Based-SOP-Assistant
+3. Click the "Discussions" tab
+4. Click "New discussion"
+5. Select category: "General"
+6. In "Title" field, paste:
+   "Request to Add Collaborator: vishakha489"
+7. In the text area, paste the message from Step 3
+8. Click "Start discussion"
+9. Done! Owner will see your request
+
+═══════════════════════════════════════════════════════════════════════════════
+YOUR COMMITS READY TO PUSH
+═══════════════════════════════════════════════════════════════════════════════
+
+Commit 1: d457eda
+  Message: feat: Environment setup, rate limiting, comprehensive testing...
+  Files: 26
+  Changes: 5,073 additions, 34 deletions
+
+Commit 2: b7337b6
+  Message: Fix gitignore and clean tracked generated files
+
+═══════════════════════════════════════════════════════════════════════════════
+WHAT IF OWNER DOESN'T RESPOND?
+═══════════════════════════════════════════════════════════════════════════════
+
+If no response after 24 hours:
+  → Try GitHub Issues method (more visible than message)
+  → Or try Option 2: Fork the repository
+  → Or wait a bit longer (they might be busy)
+
+═══════════════════════════════════════════════════════════════════════════════
+SUMMARY
+═══════════════════════════════════════════════════════════════════════════════
+
+What to do NOW:
+  1. Choose Method A, B, or C above
+  2. Send the message template (Step 3)
+  3. Wait for owner to add you
+  4. Accept email invitation
+  5. Come back and run: git push origin main
+
+Time needed: 2 minutes to send + 1-24 hours for response
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Ready? Start with Step 1 above!
+
+═══════════════════════════════════════════════════════════════════════════════
