@@ -1,0 +1,121 @@
+🛡️ API RATE LIMITING - IMPLEMENTATION SUMMARY
+==============================================
+
+✅ CHANGES IMPLEMENTED
+
+1. requirements.txt
+   ├─ Added: slowapi (production-grade rate limiting for FastAPI)
+
+2. main.py
+   ├─ Added imports for rate limiting
+   │  ├─ from slowapi import Limiter
+   │  ├─ from slowapi.util import get_remote_address
+   │  └─ from slowapi.errors import RateLimitExceeded
+   ├─ Initialized rate limiter (limiter = Limiter(key_func=get_remote_address))
+   ├─ Registered exception handler for RateLimitExceeded
+   └─ Applied rate limiting to endpoints:
+      ├─ /health        → 30 requests/minute
+      ├─ /ask (GET)     → 10 requests/minute (resource-intensive)
+      ├─ /ask (POST)    → 10 requests/minute (resource-intensive)
+      ├─ / (root)       → 30 requests/minute
+      └─ /web           → 20 requests/minute
+
+3. api_backend.py
+   ├─ Added imports for rate limiting
+   ├─ Initialized rate limiter
+   ├─ Registered exception handler
+   └─ Applied rate limiting to endpoints:
+      ├─ /health → 30 requests/minute
+      └─ /ask    → 10 requests/minute
+
+4. RATE_LIMITING_DOCS.md
+   └─ Created comprehensive documentation including:
+      ├─ How rate limiting works
+      ├─ Testing procedures
+      ├─ Configuration options
+      ├─ Rate limit rationale
+      └─ Future enhancement suggestions
+
+═══════════════════════════════════════════════════════════════
+
+🎯 RATE LIMITING CONFIGURATION
+
+Query Endpoints (10/minute):
+├─ POST /ask
+├─ GET /ask
+└─ Reasoning: Resource-intensive operations (embedding + vector search)
+
+Health/Meta Endpoints (30/minute):
+├─ GET /health
+├─ GET /
+└─ Reasoning: Light-weight operations
+
+Web Interface (20/minute):
+└─ GET /web
+
+═══════════════════════════════════════════════════════════════
+
+⚠️ IMPORTANT: INSTALL SLOWAPI
+
+Before running the API, install the rate limiting package:
+
+Windows (CMD):
+  pip install slowapi
+
+Or update all dependencies:
+  pip install -r requirements.txt
+
+═══════════════════════════════════════════════════════════════
+
+🧪 TESTING RATE LIMITS
+
+Windows PowerShell - Trigger rate limit on /health:
+  1..15 | ForEach-Object { curl.exe -X GET "http://localhost:8008/health" }
+
+Expected results:
+  ✅ Requests 1-10: Normal response
+  ❌ Requests 11-15: "Rate limit exceeded" (HTTP 429)
+
+═══════════════════════════════════════════════════════════════
+
+🔧 HOW IT WORKS
+
+Per-IP Based:
+- Each client IP is tracked separately
+- Limits reset every 60 seconds
+- Easy to configure per endpoint
+
+Example Response When Rate Limited:
+{
+  "detail": "Rate limit exceeded"
+}
+
+═══════════════════════════════════════════════════════════════
+
+📝 CUSTOMIZATION
+
+To change rate limits, edit the @limiter.limit() decorator:
+
+Current:  @limiter.limit("10/minute")
+Options:  @limiter.limit("5/second")
+          @limiter.limit("100/hour")
+          @limiter.limit("1000/day")
+
+═══════════════════════════════════════════════════════════════
+
+✨ BENEFITS
+
+✅ Prevents DDoS attacks and abuse
+✅ Prevents API scraping
+✅ Ensures fair usage for all clients
+✅ Protects against resource exhaustion
+✅ Limits expensive LLM API calls
+✅ Monitoring capability for unusual patterns
+
+═══════════════════════════════════════════════════════════════
+
+Files Modified: 3
+Files Created: 2 (documentation)
+Total Changes: Complete rate limiting system implemented
+
+Ready to deploy! 🚀

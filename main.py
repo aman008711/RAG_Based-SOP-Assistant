@@ -11,10 +11,13 @@ from typing import Dict, Any, AsyncGenerator
 from contextlib import asynccontextmanager
 
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import StreamingResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 from langchain_community.vectorstores import FAISS
 from api import init_api_keys, has_api_key
@@ -126,6 +129,9 @@ def load_models_if_needed():
         traceback.print_exc()
         raise HTTPException(status_code=503, detail=f"Model loading failed: {str(e)}")
 
+# Initialize rate limiter
+limiter = Limiter(key_func=get_remote_address)
+
 # Create FastAPI app
 app = FastAPI(
     title="RAG-Based SOP Assistant API",
@@ -133,12 +139,17 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Add rate limiter to app
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, lambda request, exc: {"detail": "Rate limit exceeded"})
+
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/health")
-def health_check():
-    """Health check endpoint"""
+@limiter.limit("30/minute")
+def health_check(request: Request):
+    """Health check endpoint - Limited to 30 requests per minute"""
     return {
         "status": "healthy",
         "timestamp": time.time(),
@@ -308,8 +319,9 @@ Answer:"""
         yield f"data: {json.dumps({'complete': True})}\n\n"
 
 @app.get("/ask")
-async def ask_question_get(question: str, session_id: str = "default"):
-    """Streaming endpoint for asking questions (GET version for EventSource)"""
+@limiter.limit("10/minute")
+async def ask_question_get(request: Request, question: str, session_id: str = "default"):
+    """Streaming endpoint for asking questions (GET version for EventSource) - Limited to 10 requests per minute"""
     load_models_if_needed()  # Load models if not already loaded
 
     if vectorstore is None:
@@ -325,15 +337,16 @@ async def ask_question_get(question: str, session_id: str = "default"):
     )
 
 @app.post("/ask")
-async def ask_question(request: AskRequest):
-    """Streaming endpoint for asking questions"""
+@limiter.limit("10/minute")
+async def ask_question(request: Request, ask_request: AskRequest):
+    """Streaming endpoint for asking questions - Limited to 10 requests per minute"""
     load_models_if_needed()  # Load models if not already loaded
 
     if vectorstore is None:
         raise HTTPException(status_code=503, detail="Vector store not loaded")
 
     return StreamingResponse(
-        generate_streaming_response(request.question, request.session_id),
+        generate_streaming_response(ask_request.question, ask_request.session_id),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",
@@ -342,8 +355,9 @@ async def ask_question(request: AskRequest):
     )
 
 @app.get("/")
-async def root():
-    """Root endpoint with API information"""
+@limiter.limit("30/minute")
+async def root(request: Request):
+    """Root endpoint with API information - Limited to 30 requests per minute"""
     return {
         "message": "RAG-Based SOP Assistant API - Week 3",
         "version": "1.0.0",
@@ -358,13 +372,15 @@ async def root():
             "Streaming responses (Typewriter effect)",
             "OpenAI LLM integration",
             "Conversational memory",
-            "Performance monitoring (TTFT)"
+            "Performance monitoring (TTFT)",
+            "Rate limiting for abuse prevention"
         ]
     }
 
 @app.get("/web")
-async def web_interface():
-    """Serve the web interface for testing"""
+@limiter.limit("20/minute")
+async def web_interface(request: Request):
+    """Serve the web interface for testing - Limited to 20 requests per minute"""
     return FileResponse("static/index.html", media_type="text/html")
 
 if __name__ == "__main__":
@@ -372,29 +388,29 @@ if __name__ == "__main__":
     import sys
     import os
 
-    print("🚀 Starting RAG-Based SOP Assistant API - Week 3")
-    print("📡 FastAPI server with streaming responses")
-    print("🔗 OpenAI integration enabled")
-    print("🌐 Access at: http://localhost:8008")
-    print("📚 Docs at: http://localhost:8008/docs")
+    print("[INFO] Starting RAG-Based SOP Assistant API - Week 3")
+    print("[INFO] FastAPI server with streaming responses")
+    print("[INFO] OpenAI integration enabled")
+    print("[INFO] Access at: http://localhost:8008")
+    print("[INFO] Docs at: http://localhost:8008/docs")
 
     # Use virtual environment's Python executable
     venv_python = os.path.join(os.path.dirname(__file__), "venv", "Scripts", "python.exe")
     if os.path.exists(venv_python):
-        print("🔧 Using virtual environment Python")
+        print("[INFO] Using virtual environment Python")
         try:
             # Use Popen to run uvicorn in background without blocking
             process = subprocess.Popen([venv_python, "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8008"])
-            print("✅ Server started successfully!")
-            print("🌐 Access at: http://localhost:8008")
-            print("📚 Docs at: http://localhost:8008/docs")
-            print("💡 Press Ctrl+C to stop the server")
+            print("[OK] Server started successfully!")
+            print("[INFO] Access at: http://localhost:8008")
+            print("[INFO] Docs at: http://localhost:8008/docs")
+            print("[INFO] Press Ctrl+C to stop the server")
 
             # Wait for the process to finish (this will block until interrupted)
             try:
                 process.wait()
             except KeyboardInterrupt:
-                print("\n🛑 Shutting down server...")
+                print("\n[INFO] Shutting down server...")
                 process.terminate()
                 process.wait()
                 print("✅ Server stopped")

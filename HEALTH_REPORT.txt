@@ -1,0 +1,94 @@
+📊 PROJECT HEALTH REPORT - RAG-Based SOP Assistant
+====================================================
+
+Generated: January 17, 2026
+Status: ⚠️ MOSTLY WORKING WITH 2 KNOWN ISSUES
+
+================================================================================
+✅ WORKING COMPONENTS (6/8)
+================================================================================
+
+1. ✅ Core Dependencies
+   - All required packages installed and functional
+   - FastAPI, Langchain, FAISS, Streamlit available
+   
+2. ✅ Configuration System
+   - config.yaml loads successfully (19 settings)
+   - API key management working
+   
+3. ✅ Vector Store
+   - FAISS index ready: 3 files present
+   - Vector store path: vectorstore/faiss_index
+   - Can be loaded and accessed
+   
+4. ✅ API Modules
+   - api.py loads successfully
+   - api_backend.py loads successfully
+   - API key initialization working
+   
+5. ✅ Main Application
+   - main.py loads and initializes correctly
+   - FastAPI backend ready
+   
+6. ✅ Retrieval Module
+   - retrieval/retrieve.py functional
+   - FAISS search working
+
+================================================================================
+❌ ISSUES FOUND (2 PROBLEMS)
+================================================================================
+
+ISSUE #1: Import Error in rag_assistant.py
+─────────────────────────────────────────
+Status: ❌ NOT WORKING
+Error: ModuleNotFoundError: No module named 'core'
+Location: rag_assistant.py:16
+
+Problem:
+  - rag_assistant.py tries to import: from core.vector_store import load_vector_store
+  - But there is NO 'core' directory in the project
+  - The actual file is: vector_store.py (in root directory)
+
+Expected Fix: Update import to:
+  from vector_store import load_vector_store
+  (instead of: from core.vector_store import load_vector_store)
+
+
+ISSUE #2: Relative Import Error in ingestion/ingest.py
+───────────────────────────────────────────────────────
+Status: ❌ NOT WORKING
+Error: attempted relative import beyond top-level package
+Location: ingestion/ingest.py:8
+
+Problem:
+  - File uses: from ..utils.chunker import chunk_text
+  - But there is NO 'utils' directory in the project structure
+  - The relative import path is trying to go up two levels
+
+Expected Fix: Either:
+  Option A: Create the missing utils/chunker.py module
+  Option B: Update the import to work without the relative import
+  Option C: Check if chunk_text functionality exists elsewhere
+
+================================================================================
+📋 SUMMARY
+================================================================================
+
+Total Components Checked: 8
+Working: 6 (75%)
+Broken: 2 (25%)
+
+Priority Issues:
+  🔴 HIGH: rag_assistant.py - Import path mismatch
+  🔴 HIGH: ingestion/ingest.py - Missing utils module
+
+Recommendation:
+  Fix these 2 import issues to make the project 100% functional
+  Both issues are path/import related, not code logic issues
+
+Vector Store Status: ✅ READY
+API Status: ✅ READY
+Config Status: ✅ READY
+Data Status: ✅ PDFs available (1 file found)
+
+================================================================================

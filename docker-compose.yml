@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  rag-api:
+    build: .
+    container_name: rag_based_sop_assistant
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env.example
+    restart: unless-stopped
+    

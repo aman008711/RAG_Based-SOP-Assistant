@@ -1,0 +1,196 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                          QUICK START GUIDE                                ║
+║              RAG-Based SOP Assistant - Get Running in 2 Steps              ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: START THE API SERVER
+─────────────────────────────────────────────────────────────────────────────
+
+Open Command Prompt (CMD) and run:
+
+  python main.py
+
+You should see:
+  [INFO] Starting RAG-Based SOP Assistant API - Week 3
+  [INFO] FastAPI server with streaming responses
+  INFO:     Application startup complete.
+  INFO:     Uvicorn running on http://0.0.0.0:8008
+
+The API is now running on http://localhost:8008
+
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 2: VALIDATE IT WORKS
+─────────────────────────────────────────────────────────────────────────────
+
+Open a NEW Command Prompt and run:
+
+  python validate_working.py
+
+Wait for this output:
+
+  ======================================================================
+  RAG-Based SOP Assistant - Working Project Validation
+  ======================================================================
+  [+] All tests passed! Project is working correctly.
+  Success Rate: 100.0%
+
+═══════════════════════════════════════════════════════════════════════════════
+
+NOW YOU CAN USE IT:
+─────────────────────────────────────────────────────────────────────────────
+
+1. WEB INTERFACE:
+   Open: http://localhost:8008/web
+   Ask questions about documents directly!
+
+2. API DOCUMENTATION:
+   Open: http://localhost:8008/docs
+   Test endpoints interactively
+
+3. PROGRAMMATIC ACCESS:
+   Python example:
+   
+   import requests
+   
+   response = requests.post(
+       'http://localhost:8008/ask',
+       json={"question": "What is in this document?"},
+       stream=True
+   )
+   
+   for line in response.iter_lines():
+       if line:
+           print(line)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+ENDPOINTS AVAILABLE:
+─────────────────────────────────────────────────────────────────────────────
+
+GET http://localhost:8008/health
+  → Health check
+
+GET http://localhost:8008/
+  → API information
+
+POST http://localhost:8008/ask
+  → Ask question (JSON body with "question" and optional "session_id")
+  → Returns: Streaming JSON responses
+
+GET http://localhost:8008/ask?question=...&session_id=...
+  → Ask question via GET
+  → Returns: Streaming JSON responses
+
+GET http://localhost:8008/web
+  → Web interface (HTML)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+CONFIGURATION:
+─────────────────────────────────────────────────────────────────────────────
+
+All settings are in: config.yaml
+
+Key settings:
+  - pdf_directory: "data/pdf"            (Where documents are)
+  - embedding_model: "all-MiniLM-L6-v2"  (Vector embeddings)
+  - max_results: 5                       (Search results to show)
+
+To use external models, add your API keys:
+  - openai_api_key: "sk-..."
+  - huggingface_token: "hf_..."
+
+═══════════════════════════════════════════════════════════════════════════════
+
+RATE LIMITING:
+─────────────────────────────────────────────────────────────────────────────
+
+API has built-in rate limiting to prevent abuse:
+
+  /health:    30 requests/minute
+  /ask:       10 requests/minute
+  /web:       20 requests/minute
+
+If you hit the limit, you'll get HTTP 429 response.
+Just wait 60 seconds and try again.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING:
+─────────────────────────────────────────────────────────────────────────────
+
+Q: Port 8008 already in use?
+A: Change port in main.py line 406: "--port", "8008" → "--port", "8009"
+
+Q: "ModuleNotFoundError" when starting?
+A: Make sure all dependencies are installed:
+   pip install -r requirements.txt
+
+Q: API not responding?
+A: Check it's running: http://localhost:8008/health
+   Should return: {"status": "healthy", ...}
+
+Q: Queries returning wrong results?
+A: Ensure PDF documents are in data/pdf/ folder
+   Run: python validate_working.py (check vector store status)
+
+Q: Rate limiting too strict?
+A: Edit rate limits in main.py (lines ~150-155)
+   @limiter.limit("10/minute") → @limiter.limit("20/minute")
+
+═══════════════════════════════════════════════════════════════════════════════
+
+ADDING DOCUMENTS:
+─────────────────────────────────────────────────────────────────────────────
+
+1. Place PDF files in: data/pdf/
+
+2. Run ingestion:
+   python ingestion/ingest.py
+
+3. Restart API:
+   Stop current server (Ctrl+C)
+   Run: python main.py
+
+Documents are now indexed and searchable!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+FULL TESTING (Optional):
+─────────────────────────────────────────────────────────────────────────────
+
+For comprehensive testing:
+
+  python test_final.py          (E2E tests - 2 minutes)
+  python test_stress.py         (Stress tests - 10-15 minutes)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+SUMMARY:
+─────────────────────────────────────────────────────────────────────────────
+
+1. python main.py                    ← Start API
+2. python validate_working.py        ← Verify it works
+3. http://localhost:8008/web         ← Use it!
+
+That's it! Your RAG Assistant is ready to use.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+NEED HELP?
+─────────────────────────────────────────────────────────────────────────────
+
+Check these files for more info:
+  - README.md                  ← Main documentation
+  - PROJECT_STATUS.txt         ← Detailed status
+  - RATE_LIMITING_DOCS.md      ← Rate limiting info
+  - TESTING_REPORT.md          ← Testing guide
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Happy querying! Your RAG-Based SOP Assistant is now ready to work! 🚀
+
+═══════════════════════════════════════════════════════════════════════════════

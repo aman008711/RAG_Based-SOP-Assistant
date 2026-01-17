@@ -30,10 +30,10 @@ class APIKeyManager:
             with open(self.config_path, 'r', encoding='utf-8') as f:
                 self.config = yaml.safe_load(f)
         except FileNotFoundError:
-            print(f"⚠️  Warning: Config file not found at {self.config_path}")
+            print("[WARNING] Config file not found")
             self.config = {}
         except Exception as e:
-            print(f"❌ Error loading config: {e}")
+            print(f"[ERROR] Error loading config: {e}")
             self.config = {}
 
     def initialize_api_keys(self):
@@ -49,16 +49,14 @@ class APIKeyManager:
             if key_value and key_value.strip():
                 os.environ[env_var] = key_value.strip()
                 keys_set += 1
-                print(f"✅ Set {env_var}")
             else:
-                # Don't override existing environment variables
                 if env_var not in os.environ:
                     os.environ[env_var] = ""
 
         if keys_set > 0:
-            print(f"🔑 Initialized {keys_set} API key(s)")
+            print(f"[INFO] Initialized {keys_set} API key(s)")
         else:
-            print("🔓 No API keys configured (using free models)")
+            print("[INFO] No API keys configured (using free models)")
 
     def get_api_key_status(self) -> Dict[str, bool]:
         """Get status of API keys (whether they are set)"""
